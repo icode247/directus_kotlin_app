@@ -1,5 +1,5 @@
 package com.example.directusapp.network
-
+import com.example.directusapp.Constants
 import com.example.directusapp.model.BlogsResponse
 import com.example.directusapp.model.BlogResponse
 import com.example.directusapp.model.GlobalResponse
@@ -23,15 +23,12 @@ interface DirectusApiService {
     suspend fun getBlogById(@Path("id") id: Int): BlogResponse
 
     companion object {
-        private const val BASE_URL = "https://test.directus.app/"
-
         fun create(): DirectusApiService {
             val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             return retrofit.create(DirectusApiService::class.java)
         }
     }
 }
-    
